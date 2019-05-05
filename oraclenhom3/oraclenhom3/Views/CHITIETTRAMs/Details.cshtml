@@ -1,0 +1,74 @@
+﻿@model oraclenhom3.Models.CHITIETTRAM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CHITIETTRAM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TRAM.MANUOC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TRAM.MANUOC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NHIETDO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NHIETDO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.APSUAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APSUAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TOCDOGIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TOCDOGIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TMAX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TMAX)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TMIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TMIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LUONGMUA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LUONGMUA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

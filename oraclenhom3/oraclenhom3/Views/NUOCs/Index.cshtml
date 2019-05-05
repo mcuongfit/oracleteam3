@@ -1,0 +1,39 @@
+﻿@model IEnumerable<oraclenhom3.Models.NUOC>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TENNUOC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HINH)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TENNUOC)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HINH)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MANUOC }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MANUOC }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MANUOC })
+        </td>
+    </tr>
+}
+
+</table>

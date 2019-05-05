@@ -1,0 +1,80 @@
+﻿@model oraclenhom3.Models.CHITIETTRAM
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CHITIETTRAM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TRAM.MANUOC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TRAM.MANUOC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NHIETDO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NHIETDO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.APSUAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APSUAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TOCDOGIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TOCDOGIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TMAX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TMAX)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TMIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TMIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LUONGMUA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LUONGMUA)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

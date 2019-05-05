@@ -1,0 +1,66 @@
+﻿@model oraclenhom3.Models.TRAM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TRAM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NUOC.TENNUOC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUOC.TENNUOC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TENTRAM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENTRAM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KINHDO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KINHDO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VIDO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VIDO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOCAO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOCAO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HINH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HINH)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MATRAM }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
