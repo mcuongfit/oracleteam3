@@ -145,6 +145,7 @@
     <Compile Include="Models\contexts.cs" />
     <Compile Include="Models\NUOC.cs" />
     <Compile Include="Models\oraclenhom3Context.cs" />
+    <Compile Include="Models\thongkeviewmodel.cs" />
     <Compile Include="Models\TRAM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -199,6 +200,7 @@
     <Content Include="Views\CHITIETTRAMs\Details.cshtml" />
     <Content Include="Views\CHITIETTRAMs\Edit.cshtml" />
     <Content Include="Views\CHITIETTRAMs\Index.cshtml" />
+    <Content Include="Views\Home\thongke.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

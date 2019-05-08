@@ -1,0 +1,187 @@
+﻿@model oraclenhom3.Models.thongkeviewmodel
+@{
+    ViewBag.Title = "thongke";
+    double[] data = Model.nhietdo.ToArray();
+    double[] datamin = Model.tmin.ToArray();
+    double[] datamax = Model.tmax.ToArray();
+    double[] datalm = Model.luongmua.ToArray();
+    double[] dataas = Model.apsuat.ToArray();
+
+}
+<h2></h2>
+<h2>thongke</h2>
+<h4> năm @Model.Nam, nước @Model.tennuoc</h4>
+
+<div class="container" style="width:100%;">
+    <div class="row col-lg-12">
+        <div class="col-lg-6 col-sm-6">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+            <canvas id="myChart1"></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-sm-6">
+            <canvas id="myChart3"></canvas>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+            <canvas id="myChart4"></canvas>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+	var ctx = document.getElementById('myChart');
+	var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+			datasets: [{
+				label: 'Nhiệt độ (Độ C)',
+                data: [@data[0],@data[1],@data[2],@data[3],@data[4],@data[5],@data[6],@data[7],@data[8],@data[9],@data[10],@data[11]],
+
+				borderColor:
+					'rgba(255, 99, 132, 1)'
+
+                ,
+                fill: false,
+				borderWidth: 1
+            },
+            {
+				label: 'Nhiệt độ min (Độ C)',
+                data: [@datamin[0],@datamin[1],@datamin[2],@datamin[3],@datamin[4],@datamin[5],@datamin[6],@datamin[7],@datamin[8],@datamin[9],@datamin[10],@datamin[11]],
+
+				borderColor:
+
+					'rgba(54, 162, 235, 1)',
+
+                fill: false,
+				borderWidth: 1
+                },
+            {
+				label: 'Nhiệt độ max (Độ C)',
+                data: [@datamax[0],@datamax[1],@datamax[2],@datamax[3],@datamax[4],@datamax[5],@datamax[6],@datamax[7],@datamax[8],@datamax[9],@datamax[10],@datamax[11]],
+
+				borderColor:
+                    'rgba(255, 206, 86, 1)'
+
+                ,
+                fill: false,
+				borderWidth: 1
+            }
+            ]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		}
+	});
+	var ctx1 = document.getElementById('myChart1');
+	var myChart = new Chart(ctx1, {
+		type: 'bar',
+		data: {
+            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+			datasets: [{
+				label: 'Lượng Mưa (mm)',
+				data: [@datalm[0],@datalm[1],@datalm[2],@datalm[3],@datalm[4],@datalm[5],@datalm[6],@datalm[7],@datalm[8],@datalm[9],@datalm[10],@datalm[11]],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		}
+	});
+</script>
+<script type="text/javascript">
+	var ctx3 = document.getElementById('myChart3');
+	var myChart = new Chart(ctx3, {
+		type: 'bar',
+		data: {
+            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+			datasets: [{
+				label: 'Khí Áp(hPA)',
+				data: [@dataas[0],@dataas[1],@dataas[2],@dataas[3],@dataas[4],@dataas[5],@dataas[6],@dataas[7],@dataas[8],@dataas[9],@dataas[10],@dataas[11]],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		}
+	});
+
+</script>
+

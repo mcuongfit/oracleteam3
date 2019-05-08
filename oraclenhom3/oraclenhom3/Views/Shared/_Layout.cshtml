@@ -1,66 +1,99 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>@ViewBag.Title - My ASP.NET Application</title>
-	@Styles.Render("~/Content/css")
-	@Scripts.Render("~/bundles/modernizr")
-	<style>
-		body {
-			padding-top: 0px;
-		}
-	</style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <style>
+        body {
+            padding-top: 0px;
+        }
+    </style>
 </head>
 <body>
-	<div style="padding-top:0px;">
-		<img src="~/Image/weather.jpg" style="width:100%; height:300px;padding: 5px 10px 5px 10px;"/>
-	</div>
-	<div class="navbar navbar-inverse">
-		<nav class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-			</div>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li>@Html.ActionLink("Home", "Index", "Home")</li>
-					<li>@Html.ActionLink("About", "About", "Home")</li>
-					<li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-				</ul>
-			</div>
-		</nav>
-	</div>
-	<div class="body-content">
-		<div class="container-fluid">
-			<div class="row" >
-				<div class="col-lg-2">
+    <div style="padding-top:0px;">
+        <img src="~/Image/weather.jpg" style="width:100%; height:300px;padding: 5px 10px 5px 10px;" />
+    </div>
+    <div class="navbar navbar-inverse">
+        <nav class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="body-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2">
+                    <h3>Thống kê </h3>
+                    <form action="/Home/thongke" method="post">
+                        <select class="form-control" name="manuoc">
+                            <option value="VM">Viêt Nam </option>
+                            <option value="MY">MaLaysia </option>
+                            <option value="ID">Indonesia</option>
+                            <option value="TH">Thai Lan </option>
+                            <option value="RP">Philippines </option>
+                            <option value="LA">Lao </option>
+                            <option value="CB">Combodia </option>
+                            <option value="BM">Myanmar </option>
+                            <option value="BX">Brunei </option>
+                            <option value="SN">Singapore </option>
+                            <option value="TT">Timor </option>
 
-				</div>
-				<div class="col-lg-9" style="max-height:570px;overflow:scroll;">
-					@RenderBody()
-					<hr />
-				</div>
-				<div class="col-lg-1">
+                        </select>
+                        <select class="form-control" name="nam">
+                            <option value="2008">2008</option>
+                            <option value="2009">2009</option>
+                            <option value="2010">2010</option>
+                            <option value="2011">2011</option>
+                            <option value="2012">2012</option>
+                            <option value="2013">2013</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
 
-				</div>
-			</div>
-			<div class="row" style="background-color:black">
-				<footer>
-					<p class="text-center" style="color:white;">Nhóm 3</p>
-				</footer>
-			</div>
-		</div>
+                        </select>
+                        <button type="submit">Thống Kê</button>
+                    </form>
+                </div>
+                <div class="col-lg-9" style="max-height:570px;overflow:scroll;">
+                    @RenderBody()
+                    <hr />
+                </div>
+                <div class="col-lg-1">
 
-		
-	</div>
+                </div>
+            </div>
+            <div class="row" style="background-color:black">
+                <footer>
+                    <p class="text-center" style="color:white;">Nhóm 3</p>
+                </footer>
+            </div>
+        </div>
 
-	@Scripts.Render("~/bundles/jquery")
-	@Scripts.Render("~/bundles/bootstrap")
-	@RenderSection("scripts", required: false)
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
