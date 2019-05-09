@@ -20,7 +20,20 @@ namespace oraclenhom3.Controllers
         public ActionResult Index()
         {
 
-            var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == 2 && c.MO == 2 && c.YEAR == 2008 && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "BAN ME THUAT");
+            CHITIETTRAM a = new CHITIETTRAM();
+            string d, m, y;
+            int dd, mm, yy;
+            d = DateTime.Now.Day.ToString();
+            m = DateTime.Now.Month.ToString();
+            y = DateTime.Now.Year.ToString();
+            dd = (int.Parse(d))-3;
+            mm = int.Parse(m);
+            var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == 2 && c.MO == 2 && c.YEAR == 2008 && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "BAN ME THUOT");
+            
+            var mot = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == dd+1 && c.MO == 2 && c.YEAR == 2008 && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "BAN ME THUOT");
+            var hai = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == dd+2 && c.MO == 2 && c.YEAR == 2008 && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "BAN ME THUOT");
+            ViewBag.mot = mot;
+            ViewBag.hai = hai;
             return View(CTT.ToList());
         }
         [HttpPost]
@@ -79,6 +92,10 @@ namespace oraclenhom3.Controllers
 
 
             return View(model);
+        }
+        public ActionResult ServerTime()
+        {
+            return Content(DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss tt"));
         }
         public ActionResult About()
         {

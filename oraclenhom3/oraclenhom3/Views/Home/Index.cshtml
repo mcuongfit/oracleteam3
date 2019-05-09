@@ -5,11 +5,33 @@
 }
 
 <h2>DỰ BÁO THỜI TIẾT @Model.First().TRAM.TENTRAM</h2>
-@{
-    string DT = DateTime.Now.ToString("dd/MM/yy");
+<hr />
+
+<h4>Hôm Nay </h4>
+<h4 id="myClock" class="text-danger"></h4>
+@section Scripts{
+    <script>
+        setInterval(function () {
+            $.ajax({
+
+                url: "/Home/ServerTime",
+
+                data: "",
+
+                type: "GET",
+
+                success: function (data) {
+                    $("#myClock").html(data);
+                },
+                error: function (xhr, err, data) {
+                    alert("Lỗi : " + err)
+                }
+            });
+        }, 1000);
+    </script>
 }
-<h4>Hôm Nay @DT</h4>
-<table class="table">
+<hr />
+<table class="table" style="margin-bottom:100px; border-color:aqua;">
     <tr>
 
         <th>
@@ -60,3 +82,56 @@
     }
 
 </table>
+<hr />
+<table class="table" style="margin-bottom:100px; border-color:aqua;">
+    <tr>
+
+        <th>
+            Nhiệt Độ
+        </th>
+        <th>
+            Áp Suất
+        </th>
+        <th>
+            Tốc Độ Gió
+        </th>
+        <th>
+            Nhiệt Độ Cao Nhất
+        </th>
+        <th>
+            Nhiệt Độ Thấp Nhất
+        </th>
+        <th>
+            Lượng Mưa
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.NHIETDO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.APSUAT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TOCDOGIO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TMAX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TMIN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LUONGMUA)
+            </td>
+
+        </tr>
+    }
+
+</table>
+<hr />
