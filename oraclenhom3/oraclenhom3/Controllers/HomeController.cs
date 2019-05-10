@@ -37,6 +37,18 @@ namespace oraclenhom3.Controllers
             ViewBag.hai = hai;
             return View(CTT.ToList());
         }
+        public ActionResult capnhat()
+        {
+            List<int> dstrams = new List<int>();
+            var trams = db.TRAMS.ToList();
+            foreach (var item in trams)
+            {
+                dstrams.Add(item.MATRAM);
+            }
+
+
+            return View();
+        }
         [HttpPost]
         public ActionResult thongke(string manuoc, int nam)
         {

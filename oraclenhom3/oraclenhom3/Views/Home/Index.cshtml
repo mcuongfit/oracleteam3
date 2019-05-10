@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Index";
 }
+<h2><span style=" font-weight:700;">DỰ BÁO THỜI TIẾT</span> <span style="color:cadetblue">@Model.First().TRAM.TENTRAM</span> </h2>
 
-<h2>DỰ BÁO THỜI TIẾT @Model.First().TRAM.TENTRAM</h2>
 <hr />
 
 <h4>Hôm Nay </h4>
@@ -34,24 +34,24 @@
 }
 <hr />
 <table class="table" style="margin-bottom:100px; border-color:aqua;">
-    <tr>
+    <tr class="text-center">
 
-        <th>
+        <th class="text-center">
             Nhiệt Độ
         </th>
-        <th>
+        <th class="text-center">
             Áp Suất
         </th>
-        <th>
+        <th class="text-center">
             Tốc Độ Gió
         </th>
-        <th>
+        <th class="text-center">
             Nhiệt Độ Cao Nhất
         </th>
-        <th>
+        <th class="text-center">
             Nhiệt Độ Thấp Nhất
         </th>
-        <th>
+        <th class="text-center">
             Lượng Mưa
         </th>
         <th></th>
@@ -59,27 +59,27 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="text-center">
 
-            <td>
-                @Html.DisplayFor(modelItem => item.NHIETDO)
+            <td style="color:chocolate">
+                @Html.DisplayFor(modelItem => item.NHIETDO)<span> &#8451</span>
+            </td>
+            <td style="color: coral">
+                @Html.DisplayFor(modelItem => item.APSUAT)<span> mmPa</span>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.APSUAT)
+                @Html.DisplayFor(modelItem => item.TOCDOGIO)<span> km/s</span>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TOCDOGIO)
+            <td style="color: crimson">
+                @Html.DisplayFor(modelItem => item.TMAX)<span> &#8451</span>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TMAX)
+            <td style="color: aquamarine">
+                @Html.DisplayFor(modelItem => item.TMIN)<span> &#8451</span>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TMIN)
+            <td style="color: cornflowerblue">
+                @Html.DisplayFor(modelItem => item.LUONGMUA)<span> mm</span>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LUONGMUA)
-            </td>
-
+            <td></td>
         </tr>
     }
 

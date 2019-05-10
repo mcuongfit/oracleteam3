@@ -70,58 +70,59 @@
     </script>
 }
 
-<div>
+    <div>
 
-    <table class="table" style="margin-bottom:100px; border-color:aqua;">
-        <tr>
+        <table class="table" style="margin-bottom:100px; border-color:aqua;">
+            <tr class="text-center">
 
-            <th>
-                Nhiệt Độ
-            </th>
-            <th>
-                Áp Suất
-            </th>
-            <th>
-                Tốc Độ Gió
-            </th>
-            <th>
-                Nhiệt Độ Cao Nhất
-            </th>
-            <th>
-                Nhiệt Độ Thấp Nhất
-            </th>
-            <th>
-                Lượng Mưa
-            </th>
-            <th></th>
-        </tr>
-
-
-        <tr>
-
-            <td>
-                @Html.DisplayFor(model => model.NHIETDO)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.APSUAT)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.TOCDOGIO)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.TMAX)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.TMIN)
-            </td>
-            <td>
-                @Html.DisplayFor(model => model.LUONGMUA)
-            </td>
-
-        </tr>
+                <th class="text-center">
+                    Nhiệt Độ
+                </th>
+                <th class="text-center">
+                    Áp Suất
+                </th>
+                <th class="text-center">
+                    Tốc Độ Gió
+                </th>
+                <th class="text-center">
+                    Nhiệt Độ Cao Nhất
+                </th>
+                <th class="text-center">
+                    Nhiệt Độ Thấp Nhất
+                </th>
+                <th class="text-center">
+                    Lượng Mưa
+                </th>
+                <th></th>
+            </tr>
 
 
-    </table>
+            <tr class="text-center">
 
-</div>
+                <td style="color:chocolate">
+                    @Html.DisplayFor(model => model.NHIETDO)<span> &#8451</span>
+                </td>
+                <td style="color: coral">
+                    @Html.DisplayFor(model => model.APSUAT)<span> mmPa</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.TOCDOGIO)<span> km/s</span>
+                </td>
+                <td style="color: crimson">
+                    @Html.DisplayFor(model => model.TMAX)<span> &#8451</span>
+                </td>
+                <td style="color: aquamarine">
+                    @Html.DisplayFor(model => model.TMIN)<span> &#8451</span>
+                </td>
+                <td style="color: cornflowerblue">
+                    @Html.DisplayFor(model => model.LUONGMUA)<span> mm</span>
+                </td>
+                <td></td>
+            </tr>
+
+
+        </table>
+        <hr />
+
+    </div>
 
