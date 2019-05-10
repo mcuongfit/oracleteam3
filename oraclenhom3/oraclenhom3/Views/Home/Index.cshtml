@@ -9,6 +9,8 @@
 
 <h4>Hôm Nay </h4>
 <h4 id="myClock" class="text-danger"></h4>
+<hr />
+
 @section Scripts{
     <script>
         setInterval(function () {
@@ -30,58 +32,6 @@
         }, 1000);
     </script>
 }
-<hr />
-<table class="table" style="margin-bottom:100px; border-color:aqua;">
-    <tr>
-
-        <th>
-            Nhiệt Độ
-        </th>
-        <th>
-            Áp Suất
-        </th>
-        <th>
-            Tốc Độ Gió
-        </th>
-        <th>
-            Nhiệt Độ Cao Nhất
-        </th>
-        <th>
-            Nhiệt Độ Thấp Nhất
-        </th>
-        <th>
-            Lượng Mưa
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.NHIETDO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.APSUAT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TOCDOGIO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TMAX)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TMIN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LUONGMUA)
-            </td>
-
-        </tr>
-    }
-
-</table>
 <hr />
 <table class="table" style="margin-bottom:100px; border-color:aqua;">
     <tr>

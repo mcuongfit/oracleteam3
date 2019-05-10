@@ -17,6 +17,7 @@ namespace oraclenhom3.Controllers
 
         private contexts db = new contexts();
 
+      
         public ActionResult Index()
         {
 
@@ -32,7 +33,7 @@ namespace oraclenhom3.Controllers
             
             var mot = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == dd+1 && c.MO == 2 && c.YEAR == 2008 && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "BAN ME THUOT");
             var hai = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == dd+2 && c.MO == 2 && c.YEAR == 2008 && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "BAN ME THUOT");
-            ViewBag.mot = mot;
+            ViewData["mot"] = 1;
             ViewBag.hai = hai;
             return View(CTT.ToList());
         }
@@ -103,7 +104,33 @@ namespace oraclenhom3.Controllers
 
             return View();
         }
-
+        [HttpPost]
+        public ActionResult chonnuoc( string manuoc)
+        {
+            List<string> arr = new List<string>();
+            var trams = db.TRAMS.Where(c => c.MANUOC == manuoc);
+            foreach(var item in trams)
+            {
+                arr.Add(item.TENTRAM);
+            }
+            var ctt = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == 2 && c.MO == 2 && c.YEAR == 2008 && c.TRAM.NUOC.MANUOC == manuoc ).First();
+            ViewData["arr"] = arr;
+            return View(ctt);
+        }
+        [HttpPost]
+        public ActionResult dubao( string manuoc,string tentram)
+        {
+            List<string> arr = new List<string>();
+            var trams = db.TRAMS.Where(c => c.MANUOC == manuoc);
+            foreach (var item in trams)
+            {
+                arr.Add(item.TENTRAM);
+            }
+            var ctt = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == 2 && c.MO == 2 && c.YEAR == 2008 && c.TRAM.NUOC.MANUOC == manuoc&&c.TRAM.TENTRAM==tentram).First();
+            ViewData["arr"] = arr;
+            return View(ctt);
+            
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

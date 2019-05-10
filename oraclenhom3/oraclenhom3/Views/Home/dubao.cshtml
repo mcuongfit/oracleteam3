@@ -1,0 +1,124 @@
+﻿@model oraclenhom3.Models.CHITIETTRAM
+
+@{
+    ViewBag.Title = "chonnuoc";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2><span style=" font-weight:700;">DỰ BÁO THỜI TIẾT</span> <span style="color:cadetblue">@Model.TRAM.TENTRAM</span> </h2>
+        <hr />
+
+        <h4>Hôm Nay </h4>
+        <h4 id="myClock" class="text-danger"></h4>
+        <hr />
+    </div>
+    <div class="col-md-6">
+
+        <div class="row">
+            <div class="col-md-4">
+                <img src="~/images/@Model.TRAM.NUOC.HINH" class="rounded" alt="Cinque Terre" width="100px" height="75px">
+            </div>
+            <div class="col-md-6">
+                <form action="/Home/dubao" method="post">
+                    <input type="hidden" value="@Model.TRAM.MANUOC" name="manuoc" />
+                    <select class="form-control" name="tentram">
+                        @{
+                            var lists = (List<string>)ViewData["arr"];
+                            foreach (var item in lists)
+                            {
+                                <option value="@item">@item </option>
+
+
+                            }
+                        }
+                    </select>
+                    <button type="submit">DỰ BÁO</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+@section Scripts{
+    <script>
+        setInterval(function () {
+            $.ajax({
+
+                url: "/Home/ServerTime",
+
+                data: "",
+
+                type: "GET",
+
+                success: function (data) {
+                    $("#myClock").html(data);
+                },
+                error: function (xhr, err, data) {
+                    alert("Lỗi : " + err)
+                }
+            });
+        }, 1000);
+    </script>
+}
+
+<div>
+
+    <table class="table" style="margin-bottom:100px; border-color:aqua;">
+        <tr>
+
+            <th>
+                Nhiệt Độ
+            </th>
+            <th>
+                Áp Suất
+            </th>
+            <th>
+                Tốc Độ Gió
+            </th>
+            <th>
+                Nhiệt Độ Cao Nhất
+            </th>
+            <th>
+                Nhiệt Độ Thấp Nhất
+            </th>
+            <th>
+                Lượng Mưa
+            </th>
+            <th></th>
+        </tr>
+
+
+        <tr>
+
+            <td>
+                @Html.DisplayFor(model => model.NHIETDO)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.APSUAT)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.TOCDOGIO)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.TMAX)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.TMIN)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.LUONGMUA)
+            </td>
+
+        </tr>
+
+
+    </table>
+
+</div>
+

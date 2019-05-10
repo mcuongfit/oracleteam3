@@ -202,9 +202,12 @@
     <Content Include="Views\CHITIETTRAMs\Edit.cshtml" />
     <Content Include="Views\CHITIETTRAMs\Index.cshtml" />
     <Content Include="Views\Home\thongke.cshtml" />
+    <Content Include="Views\Home\chonnuoc.cshtml" />
+    <Content Include="Views\Home\dubao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
