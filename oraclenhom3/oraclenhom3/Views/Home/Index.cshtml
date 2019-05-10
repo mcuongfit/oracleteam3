@@ -1,9 +1,9 @@
-﻿@model IEnumerable<oraclenhom3.Models.CHITIETTRAM>
+﻿@model oraclenhom3.Models.dubaoviewmodel
 
 @{
     ViewBag.Title = "Index";
 }
-<h2><span style=" font-weight:700;">DỰ BÁO THỜI TIẾT</span> <span style="color:cadetblue">@Model.First().TRAM.TENTRAM</span> </h2>
+<h2><span style=" font-weight:700;">DỰ BÁO THỜI TIẾT</span> <span style="color:cadetblue">@Model.tenTram</span> </h2>
 
 <hr />
 
@@ -32,56 +32,59 @@
         }, 1000);
     </script>
 }
-<hr />
-<table class="table" style="margin-bottom:100px; border-color:aqua;">
-    <tr class="text-center">
 
-        <th class="text-center">
-            Nhiệt Độ
-        </th>
-        <th class="text-center">
-            Áp Suất
-        </th>
-        <th class="text-center">
-            Tốc Độ Gió
-        </th>
-        <th class="text-center">
-            Nhiệt Độ Cao Nhất
-        </th>
-        <th class="text-center">
-            Nhiệt Độ Thấp Nhất
-        </th>
-        <th class="text-center">
-            Lượng Mưa
-        </th>
-        <th></th>
-    </tr>
+<div>
 
-    @foreach (var item in Model)
-    {
+    <table class="table" style="margin-bottom:100px; border-color:aqua;">
+        <tr class="text-center">
+
+            <th class="text-center">
+                Nhiệt Độ
+            </th>
+            <th class="text-center">
+                Áp Suất
+            </th>
+            <th class="text-center">
+                Tốc Độ Gió
+            </th>
+            <th class="text-center">
+                Nhiệt Độ Cao Nhất
+            </th>
+            <th class="text-center">
+                Nhiệt Độ Thấp Nhất
+            </th>
+            <th class="text-center">
+                Lượng Mưa
+            </th>
+            <th></th>
+        </tr>
+
+
         <tr class="text-center">
 
             <td style="color:chocolate">
-                @Html.DisplayFor(modelItem => item.NHIETDO)<span> &#8451</span>
+                @Html.DisplayFor(model => model.nhietdo)<span> &#8451</span>
             </td>
             <td style="color: coral">
-                @Html.DisplayFor(modelItem => item.APSUAT)<span> mmPa</span>
+                @Html.DisplayFor(model => model.apsuat)<span> mmPa</span>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TOCDOGIO)<span> km/s</span>
+                @Html.DisplayFor(model => model.tocdogio)<span> km/s</span>
             </td>
             <td style="color: crimson">
-                @Html.DisplayFor(modelItem => item.TMAX)<span> &#8451</span>
+                @Html.DisplayFor(model => model.tmax)<span> &#8451</span>
             </td>
             <td style="color: aquamarine">
-                @Html.DisplayFor(modelItem => item.TMIN)<span> &#8451</span>
+                @Html.DisplayFor(model => model.tmin)<span> &#8451</span>
             </td>
             <td style="color: cornflowerblue">
-                @Html.DisplayFor(modelItem => item.LUONGMUA)<span> mm</span>
+                @Html.DisplayFor(model => model.luongmua)<span> mm</span>
             </td>
             <td></td>
         </tr>
-    }
 
-</table>
-<hr />
+
+    </table>
+    <hr />
+
+</div>

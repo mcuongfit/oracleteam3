@@ -143,6 +143,7 @@
     </Compile>
     <Compile Include="Models\CHITIETTRAM.cs" />
     <Compile Include="Models\contexts.cs" />
+    <Compile Include="Models\dubaoviewmodel.cs" />
     <Compile Include="Models\indexviewmodel.cs" />
     <Compile Include="Models\NUOC.cs" />
     <Compile Include="Models\oraclenhom3Context.cs" />

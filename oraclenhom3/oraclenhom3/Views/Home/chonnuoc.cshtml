@@ -1,50 +1,50 @@
-﻿@model oraclenhom3.Models.CHITIETTRAM
+﻿@model oraclenhom3.Models.dubaoviewmodel
 
 @{
     ViewBag.Title = "chonnuoc";
 }
 
-    <div class="row">
-        <div class="col-md-6">
-            <h2><span style=" font-weight:700;">DỰ BÁO THỜI TIẾT</span> <span style="color:cadetblue">@Model.TRAM.TENTRAM</span> </h2>
-            <hr />
+<div class="row">
+    <div class="col-md-6">
+        <h2><span style=" font-weight:700;">DỰ BÁO THỜI TIẾT</span> <span style="color:cadetblue">@Model.tenTram</span> </h2>
+        <hr />
 
-            <h4>Hôm Nay </h4>
-            <h4 id="myClock" class="text-danger"></h4>
-            <hr />
-        </div>
-        <div class="col-md-6">
+        <h4>Hôm Nay </h4>
+        <h4 id="myClock" class="text-danger"></h4>
+        <hr />
+    </div>
+    <div class="col-md-6">
 
-            <div class="row">
-                <div class="col-md-4">
-                    <img src="~/images/@Model.TRAM.NUOC.HINH" class="rounded" alt="Cinque Terre" width="100px" height="75px">
-                </div>
-                <div class="col-md-6">
-                    <form action="/Home/dubao" method="post">
-                        <input type="hidden" value="@Model.TRAM.MANUOC" name="manuoc" />
-                        <select class="form-control" name="tentram">
-                            @{
-                                var lists = (List<string>)ViewData["arr"];
-                                foreach (var item in lists)
-                                {
-                                    <option value="@item">@item </option>
-
-
-                                }
-                            }
-                        </select>
-                        <div style="float:right;margin-top:20px;">
-                            <button type="submit">DỰ BÁO</button>
-                        </div>
-                        
-                    </form>
-                </div>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="~/images/@Model.Hinh" class="rounded" alt="Cinque Terre" width="100px" height="75px">
             </div>
+            <div class="col-md-6">
+                <form action="/Home/dubao" method="post">
+                    <input type="hidden" value="@Model.Manuoc" name="manuoc" />
+                    <select class="form-control" name="tentram">
+                        @{
+                            var lists = (List<string>)ViewData["arr"];
+                            foreach (var item in lists)
+                            {
+                                <option value="@item">@item </option>
 
 
+                            }
+                        }
+                    </select>
+                    <div style="float:right;margin-top:20px;">
+                        <button type="submit">DỰ BÁO</button>
+                    </div>
+
+                </form>
+            </div>
         </div>
+
 
     </div>
+
+</div>
 
 
 
@@ -70,59 +70,59 @@
     </script>
 }
 
-    <div>
 
-        <table class="table" style="margin-bottom:100px; border-color:aqua;">
-            <tr class="text-center">
+<div>
 
-                <th class="text-center">
-                    Nhiệt Độ
-                </th>
-                <th class="text-center">
-                    Áp Suất
-                </th>
-                <th class="text-center">
-                    Tốc Độ Gió
-                </th>
-                <th class="text-center">
-                    Nhiệt Độ Cao Nhất
-                </th>
-                <th class="text-center">
-                    Nhiệt Độ Thấp Nhất
-                </th>
-                <th class="text-center">
-                    Lượng Mưa
-                </th>
-                <th></th>
-            </tr>
+    <table class="table" style="margin-bottom:100px; border-color:aqua;">
+        <tr class="text-center">
 
-       
-                <tr class="text-center">
+            <th class="text-center">
+                Nhiệt Độ
+            </th>
+            <th class="text-center">
+                Áp Suất
+            </th>
+            <th class="text-center">
+                Tốc Độ Gió
+            </th>
+            <th class="text-center">
+                Nhiệt Độ Cao Nhất
+            </th>
+            <th class="text-center">
+                Nhiệt Độ Thấp Nhất
+            </th>
+            <th class="text-center">
+                Lượng Mưa
+            </th>
+            <th></th>
+        </tr>
 
-                    <td style="color:chocolate">
-                        @Html.DisplayFor(model => model.NHIETDO)<span> &#8451</span>
-                    </td>
-                    <td style="color: coral">
-                        @Html.DisplayFor(model => model.APSUAT)<span> mmPa</span>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.TOCDOGIO)<span> km/s</span>
-                    </td>
-                    <td style="color: crimson">
-                        @Html.DisplayFor(model => model.TMAX)<span> &#8451</span>
-                    </td>
-                    <td style="color: aquamarine">
-                        @Html.DisplayFor(model => model.TMIN)<span> &#8451</span>
-                    </td>
-                    <td style="color: cornflowerblue">
-                        @Html.DisplayFor(model => model.LUONGMUA)<span> mm</span>
-                    </td>
-                    <td></td>
-                </tr>
-            
 
-        </table>
-        <hr />
-        
-    </div>
+        <tr class="text-center">
 
+            <td style="color:chocolate">
+                @Html.DisplayFor(model => model.nhietdo)<span> &#8451</span>
+            </td>
+            <td style="color: coral">
+                @Html.DisplayFor(model => model.apsuat)<span> mmPa</span>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.tocdogio)<span> km/s</span>
+            </td>
+            <td style="color: crimson">
+                @Html.DisplayFor(model => model.tmax)<span> &#8451</span>
+            </td>
+            <td style="color: aquamarine">
+                @Html.DisplayFor(model => model.tmin)<span> &#8451</span>
+            </td>
+            <td style="color: cornflowerblue">
+                @Html.DisplayFor(model => model.luongmua)<span> mm</span>
+            </td>
+            <td></td>
+        </tr>
+
+
+    </table>
+    <hr />
+
+</div>
