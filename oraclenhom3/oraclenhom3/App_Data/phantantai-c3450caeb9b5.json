@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "phantantai",
+  "private_key_id": "c3450caeb9b54883502c160bd7bc8913d25ebede",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCR2HnlLAOUOsde\n+VPMYiZmwiYjw3QkIyRonEPw+z/1ZxuY9LOQvBskLyJizzFiMx/OPcX6JGzmDG/V\nx9SdfgDTq5L+ACLkS25LuQ789T17pNlBP6aeRd9IcJNvivT1ybsDF+JcQu2cpV15\nLYr5y8oXc5mLnXDGIPOMGCBOQHGs5jp9PiXwEXfeXpAPU2zLzpLaZlgTxLVEaRdN\ntdcX3IBlU7IxocZMn4Z5LYtAZBaCB2szNF07gttL5HTIpHTqS7LH25vEsZzq0VTf\nKDzdVvlUUpfthnoIwwLjleiVq7DlZLt/j3nS5zMB99uEvJBCLsU7zdG0iDeFPupG\n2n5F4PTNAgMBAAECggEABRDsdwn229zI1SM7BnP4WoRu97oP3Dt+RcX71DCeEaOx\nwTfqzuHB3Zlni+AfmoYlGjBqIpzGTZ1r+xSUbZ4VYETq97jAfYajP60feKj6KEPb\nKhmQa5oIvgbvECZXCPynat2XBtZqU5Eo9I8g7zllfTgOQtvGsZMucpTZ9m3lpPhS\n66qQo6x/om2MMfgE4KtMOeMsu+NpJVM5EZQYZx8BHnPFzYuiEkD2s36sHhFVHc7V\nN1b2HBU+04YRblIdTbu4oDK+48ZkrViukl17atdAqsb1WTZg7VAtFmjMK+u0vnTu\n4ocmgHiZ2Ttw43irXiF9q1/VETd48oEkX8Ha8/+n3wKBgQDI1wzMyWlcbmuQpWJZ\nMX4XuGea7YsgWGpQiWqE8Okq1yMgl8sg0WsIEsI6/2lLx2OywG02mxGOTS6rohcG\nxyWXgEn4B+J06r4KRFMQrIgLpv6YVxy02frG82OOBMRr0/mg5e+mrdJHQntph8ZX\nQuP2R29Fs/B5IlkxgdyyHXgIbwKBgQC55sx/3UPuzTVxm7wEECVPiUtrG4aNXGg2\nn7p7reerFMCXwAYISMQLpWhDvph8q7BeaPl6vKDg9An2UCezw1X4pysvSi/75EJO\nXeB/pqPqBNviVJo40cWL4gpeFXGDPIY5FE6S65tERHxgHi9sWsn1mPHPozIfqToT\nTkVoFz+cgwKBgQCmr5S4AhGn3Rz5F8ngLOtx1GJoeu4VEkxqOyJk420hWRyWWGUF\n/8jNEoSRYpmJgxqDqKD7yQdxCy3I1OY3geD5NEgvyptwXcML0lj+ZbMjuJ1k4ie5\nEZDIvgfKPrqmo29y0mNr+qei7NJwa3d5xNJd/DulpgnW/2L3a8g3K64LkQKBgE5n\n+o5fSzyXzlepQGZSTPo7xNRa2qgadlW7jpKFaXVtnkEimyi5T/49eDlCVNwYKZ3Y\nFojer9fQ9bauXeBinYrvLraWSqCpyBF3ZK1SIkYcYIUX+6fFSdVSs960mpioWVAP\nsYgj2Ou1GuQLNyMzM4TjSfGyOfzCih0EYR+i1pBzAoGAIJJCXeuggTP5kw49RaRR\nUQ/XhrRiLiAj+h+S9VA5rFntToibrobPZnQGURA5sliISqa+Ex/1OO2gOqVAPkrT\ne3C35loKyEVdrAzHtToo8PIhvvMSF7J4o4gH3C+kekOlUl2YQA7c542zS12rJdCZ\niggXTeAbySzrB033NHevZJA=\n-----END PRIVATE KEY-----\n",
+  "client_email": "phantantai140-gmail-com@phantantai.iam.gserviceaccount.com",
+  "client_id": "105703345961336924770",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/phantantai140-gmail-com%40phantantai.iam.gserviceaccount.com"
+}

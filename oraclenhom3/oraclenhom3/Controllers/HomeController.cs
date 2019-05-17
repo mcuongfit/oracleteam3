@@ -12,6 +12,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using oraclenhom3.Models;
+using Google.Cloud.BigQuery.V2;
+using Google.Apis.Auth.OAuth2;
+
 namespace oraclenhom3.Controllers
 {
     public class HomeController : Controller
@@ -59,7 +62,7 @@ namespace oraclenhom3.Controllers
                 Tocdogio = 0;
                 for (int i = 2008; i < yy; i++)
                 {
-                    var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == (18+j) && c.MO == mm && c.YEAR == i && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "BAN ME THUOT").First();
+                    var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == (18+j) && c.MO == mm && c.YEAR == i && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "VINH").First();
                     Nhietd += Convert.ToInt32(CTT.NHIETDO);
                     Luongm += Convert.ToInt32(CTT.LUONGMUA);
                     Aps += Convert.ToInt32(CTT.APSUAT);
@@ -282,61 +285,77 @@ namespace oraclenhom3.Controllers
 
 
         }
-        public ActionResult Update()
+
+		public static List<CHITIETTRAM> Update(string matram, string mo, string da)
+		{
+			List<CHITIETTRAM> re = new List<CHITIETTRAM>();
+			// Add file json.
+			using (BigQueryClient client = BigQueryClient.Create("phantantai", GoogleCredential.FromFile(@"C:\Users\phant\Desktop\oracleteam3\oraclenhom3\oraclenhom3\App_Data\phantantai-c3450caeb9b5.json")))
+			{
+				string query = $@"
+				SELECT stn as MATRAM,da as DA,mo as MO,year as YEAR ,temp as NHIETDO,slp as APSUAT,wdsp as TOCDOGIO,max as TMAX,min as TMIN,prcp as LUONGMUA 
+				FROM `bigquery-public-data.noaa_gsod.gsod2019` 
+				where stn = '{matram}' and mo = '{mo}' and da = '{da}'";
+				BigQueryJob job = client.CreateQueryJob(
+					sql: query,
+					parameters: null,
+					options: new QueryOptions { UseQueryCache = false });
+				// Wait for the job to complete.
+				job.PollUntilCompleted();
+				CHITIETTRAM chitie = new CHITIETTRAM();
+				foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
+				{
+					chitie.MATRAM = int.Parse($"{row["MATRAM"]}");
+					chitie.MO = byte.Parse($"{row["MO"]}");
+					chitie.DA = short.Parse($"{row["DA"]}");
+					chitie.YEAR = short.Parse($"{row["YEAR"]}");
+
+					var nd = float.Parse($"{row["NHIETDO"]}");
+					chitie.NHIETDO = (byte)nd;
+
+					var tmp = float.Parse($"{row["APSUAT"]}");
+					chitie.APSUAT = tmp < 900 ? (short)tmp : (short)0;
+					tmp = float.Parse($"{row["TOCDOGIO"]}");
+					chitie.TOCDOGIO = tmp < 900 ? (short)tmp : (short)0;
+					tmp = float.Parse($"{row["TMAX"]}");
+					chitie.TMAX = tmp < 900 ? (short)tmp : (short)0;
+					tmp = float.Parse($"{row["TMIN"]}");
+					chitie.TMIN = tmp < 900 ? (short)tmp : (short)0;
+					tmp = float.Parse($"{row["LUONGMUA"]}");
+					chitie.LUONGMUA = tmp < 900 ? (short)tmp : (short)0;
+					re.Add(chitie);
+				}
+				return re;
+			}
+		}
+		public ActionResult Update()
         {
-            string d, m, y;
-            int dd, mm, yy;//ngày tháng năm hiện tại, có gì tại lấy ngày -7
-            int Nhietd = 0, Aps = 0, Luongm = 0, Tmax = 0, Tmin = 0, Tocdogio = 0;
-            d = DateTime.Now.Day.ToString();
-            m = DateTime.Now.Month.ToString();
-            y = DateTime.Now.Year.ToString();
-            dd = (int.Parse(d));
-            mm = int.Parse(m);
-            yy = int.Parse(y);
+			string d, m;
+            int dd, mm;//ngày tháng năm hiện tại, có gì tại lấy ngày -7
+			var date = DateTime.Now.AddDays(-7);
+            dd = date.Day;
+            mm = date.Month;
+			d = dd > 9 ? dd.ToString() : "0"+dd.ToString();
+			m = mm > 9 ? mm.ToString() : "0"+mm.ToString();
+			
             List<CHITIETTRAM> re = new List<CHITIETTRAM>();//tài add data chi tiết trạm của mỡi trạm của ngày trên vào đây
-            List<int> arr = new List<int>();//đây là arr gồm 682   trạm của tất cả các nước
+            List<string> arr = new List<string>();//đây là arr gồm 682   trạm của tất cả các nước
             var arrtram = db.TRAMS.ToList();
             
       
             foreach (var item in arrtram)
             {
-                arr.Add(item.MATRAM);
+                arr.Add(item.MATRAM.ToString());
             }
-            //using (BigQueryClient client = BigQueryClient.Create("phantantai", GoogleCredential.FromFile("../../phantantai-c3450caeb9b5.json")))
-            //{
-            //    string query = $@"
-            //	SELECT stn as MATRAM,da as DA,mo as MO,year as YEAR ,temp as NHIETDO,slp as APSUAT,wdsp as TOCDOGIO,max as TMAX,min as TMIN,prcp as LUONGMUA 
-            //	FROM `bigquery-public-data.noaa_gsod.gsod2019` 
-            //	where stn = '{matram}' and mo = '{mo}' and da > '{da}'";
-            //    BigQueryJob job = client.CreateQueryJob(
-            //        sql: query,
-            //       parameters: null,
-            //       options: new QueryOptions { UseQueryCache = false });
-            // Wait for the job to complete.
-            //    job.PollUntilCompleted();
-            //    CHITIETTRAM chitie = new CHITIETTRAM();
-            //    foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
-            //  {
-            //      chitie.MATRAM = int.Parse($"{row["MATRAM"]}");
-            //      chitie.MO = byte.Parse($"{row["MO"]}");
-            //     chitie.DA = short.Parse($"{row["DA"]}");
-            //    chitie.YEAR = short.Parse($"{row["YEAR"]}");
-
-            //    var nd = float.Parse($"{row["NHIETDO"]}");
-            //    chitie.NHIETDO = (byte)nd;
-
-            //    var tmp = float.Parse($"{row["APSUAT"]}");
-            //    chitie.APSUAT = tmp < 900 ? (int)tmp : 0;
-            //   tmp = float.Parse($"{row["TOCDOGIO"]}");
-            //  chitie.TOCDOGIO = tmp < 900 ? (short)tmp : (short)0;
-            //  tmp = float.Parse($"{row["TMAX"]}");
-            //  chitie.TMAX = tmp < 900 ? (short)tmp : (short)0;
-            //  tmp = float.Parse($"{row["TMIN"]}");
-            //  chitie.TMIN = tmp < 900 ? (short)tmp : (short)0;
-            //  tmp = float.Parse($"{row["LUONGMUA"]}");
-            // chitie.LUONGMUA = tmp < 900 ? (short)tmp : (short)0;
-            // re.Add(chitie);
-            // }
+            
+			foreach(var item in arr)
+			{
+				var data = Update(item, m, d);
+				if (data.Count != 0)
+				{
+					re.Add(data[0]);
+				}
+			}
             return View();
             
         }
