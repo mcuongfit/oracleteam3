@@ -145,6 +145,7 @@
     <Compile Include="Models\contexts.cs" />
     <Compile Include="Models\dubaoviewmodel.cs" />
     <Compile Include="Models\indexviewmodel.cs" />
+    <Compile Include="Models\listdubaoviewmodel.cs" />
     <Compile Include="Models\NUOC.cs" />
     <Compile Include="Models\oraclenhom3Context.cs" />
     <Compile Include="Models\thongkeviewmodel.cs" />

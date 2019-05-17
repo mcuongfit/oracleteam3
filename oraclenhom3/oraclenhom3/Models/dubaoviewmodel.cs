@@ -17,4 +17,5 @@ namespace oraclenhom3.Models
         public string Hinh { get; set; }
         public string Manuoc { get; set; }
     }
+
 }

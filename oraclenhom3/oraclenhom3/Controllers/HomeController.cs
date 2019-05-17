@@ -17,11 +17,13 @@ namespace oraclenhom3.Controllers
 
         private contexts db = new contexts();
 
-      
+        [HttpGet]
         public ActionResult Index()
         {
 
+            List<dubaoviewmodel> ctts = new List<dubaoviewmodel>();
             dubaoviewmodel ctt = new dubaoviewmodel();
+            
             string d, m, y, anh;
             int dd, mm, yy;
             int Nhietd = 0, Aps = 0, Luongm = 0, Tmax = 0, Tmin = 0, Tocdogio = 0;
@@ -39,37 +41,54 @@ namespace oraclenhom3.Controllers
             {
                 arr.Add(item.TENTRAM);
             }
-            for (int i = 2008; i < yy; i++)
+            for (int j = 0; j < 4; j++)
             {
-                var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == dd && c.MO == mm-3 && c.YEAR == i && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "BAN ME THUOT").First();
-                Nhietd += Convert.ToInt32(CTT.NHIETDO);
-                Luongm += Convert.ToInt32(CTT.LUONGMUA);
-                Aps += Convert.ToInt32(CTT.APSUAT);
-                Tmax += Convert.ToInt32(CTT.TMAX);
-                Tmin += Convert.ToInt32(CTT.TMIN);
-                Tocdogio += Convert.ToInt32(CTT.TOCDOGIO);
+                Random rd = new Random();
+                
+                int rdom = rd.Next(1, 5);
+               
+                Nhietd = 0;
+                Aps = 0;
+                Luongm = 0;
+                Tmax = 0;
+                Tmin = 0;
+                Tocdogio = 0;
+                for (int i = 2008; i < yy; i++)
+                {
+                    var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == 18+j && c.MO == mm && c.YEAR == i && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "BAN ME THUOT").First();
+                    Nhietd += Convert.ToInt32(CTT.NHIETDO);
+                    Luongm += Convert.ToInt32(CTT.LUONGMUA);
+                    Aps += Convert.ToInt32(CTT.APSUAT);
+                    Tmax += Convert.ToInt32(CTT.TMAX);
+                    Tmin += Convert.ToInt32(CTT.TMIN);
+                    Tocdogio += Convert.ToInt32(CTT.TOCDOGIO);
 
+                }
+                
+                Nhietd = Nhietd / (yy - 2008);
+                Nhietd = (((Nhietd - 32) * 5) / 9)+rdom+j;
+                Luongm = Luongm / (yy - 2008)+rdom+j;
+                Aps = (Aps / (yy - 2008))+rdom+j;
+                Tmin = Tmin / (yy - 2008);
+                Tmin = (((Tmin - 32) * 5) / 9)+rdom+j;
+                Tmax = Tmax / (yy - 2008);
+                Tmax = (((Tmax - 32) * 5) / 9)+rdom+j;
+                Tocdogio = Tocdogio / (yy - 2008)+rdom+j;
+                ctt.apsuat = Aps;
+                ctt.luongmua = Luongm;
+                ctt.nhietdo = Nhietd;
+                ctt.tmax = Tmax;
+                ctt.tmin = Tmin;
+                ctt.tocdogio = Tocdogio;
+                ctt.tenTram = "BAN ME THUAT";
+                ctt.Hinh = anh;
+                ctt.Manuoc = "VM";
+                ctts.Add(ctt);
+               
             }
-            Nhietd = Nhietd / (yy - 2008);
-            Nhietd = ((Nhietd - 32) * 5) / 9;
-            Luongm = Luongm / (yy - 2008);
-            Aps = Aps / (yy - 2008);
-            Tmin = Tmin / (yy - 2008);
-            Tmin = ((Tmin - 32) * 5) / 9;
-            Tmax = Tmax / (yy - 2008);
-            Tmax = ((Tmax - 32) * 5) / 9;
-            Tocdogio = Tocdogio / (yy - 2008);
-            ctt.apsuat = Aps;
-            ctt.luongmua = Luongm;
-            ctt.nhietdo = Nhietd;
-            ctt.tmax = Tmax;
-            ctt.tmin = Tmin;
-            ctt.tocdogio = Tocdogio;
-            ctt.tenTram = "BAN ME THUAT";
-            ctt.Hinh = anh;
-            ctt.Manuoc = "VM";
             ViewData["arr"] = arr;
-            return View(ctt);
+          
+            return View(ctts);
         }
         public ActionResult capnhat()
         {
@@ -174,7 +193,7 @@ namespace oraclenhom3.Controllers
             }
             for (int i = 2008; i < yy; i++)
             {
-                var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == dd && c.MO == mm - 3 && c.YEAR == i && c.TRAM.NUOC.MANUOC == manuoc).First();
+                var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == 18 && c.MO == mm  && c.YEAR == i && c.TRAM.NUOC.MANUOC == manuoc).First();
                 Nhietd += Convert.ToInt32(CTT.NHIETDO);
                 Luongm += Convert.ToInt32(CTT.LUONGMUA);
                 Aps += Convert.ToInt32(CTT.APSUAT);
@@ -200,7 +219,7 @@ namespace oraclenhom3.Controllers
             ctt.tocdogio = Tocdogio;
             ctt.tenTram = tenTram;
             ctt.Hinh = anh;
-            ctt.Manuoc = "VM";
+            ctt.Manuoc = manuoc;
             ViewData["arr"] = arr;
             return View(ctt);
         }
@@ -227,7 +246,7 @@ namespace oraclenhom3.Controllers
             }
             for (int i = 2008; i < yy; i++)
             {
-                var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == dd && c.MO == mm && c.YEAR == i && c.TRAM.NUOC.MANUOC == manuoc && c.TRAM.TENTRAM == tentram).First();
+                var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == 18 && c.MO == mm && c.YEAR == i && c.TRAM.NUOC.MANUOC == manuoc && c.TRAM.TENTRAM == tentram).First();
                 Nhietd += Convert.ToInt32(CTT.NHIETDO);
                 Luongm += Convert.ToInt32(CTT.LUONGMUA);
                 Aps += Convert.ToInt32(CTT.APSUAT);
