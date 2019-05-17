@@ -1,12 +1,16 @@
-﻿@model oraclenhom3.Models.dubaoviewmodel
+﻿@model List<oraclenhom3.Models.dubaoviewmodel>
 
 @{
+    /**/
+
+    /**/
+
     ViewBag.Title = "chonnuoc";
 }
 
 <div class="row">
     <div class="col-md-6">
-        <h2><span style=" font-weight:700;">DỰ BÁO THỜI TIẾT</span> <span style="color:cadetblue">@Model.tenTram</span> </h2>
+        <h2><span style=" font-weight:700;">DỰ BÁO THỜI TIẾT</span> <span style="color:cadetblue">@Model.First().tenTram</span> </h2>
         <hr />
 
         <h4>Hôm Nay </h4>
@@ -17,12 +21,11 @@
 
         <div class="row">
             <div class="col-md-4">
-                <img src="~/images/@Model.Hinh" class="rounded" alt="Cinque Terre" width="100px" height="75px">
+                <img src="~/images/@Model.First().Hinh" class="rounded" alt="Cinque Terre" width="100px" height="75px">
             </div>
             <div class="col-md-6">
                 <form action="/Home/dubao" method="post">
-                    <input type="hidden" value="@Model.Manuoc" name="manuoc" />
-                    
+                    <input type="hidden" value="@Model.First().Manuoc" name="manuoc" />
                     <select class="form-control" name="tentram">
                         @{
                             var lists = (List<string>)ViewData["arr"];
@@ -34,7 +37,7 @@
                             }
                         }
                     </select>
-                    <div style="float:right;">
+                    <div style="float:right;margin-top:20px;">
                         <button type="submit">DỰ BÁO</button>
                     </div>
 
@@ -71,59 +74,97 @@
     </script>
 }
 
-    <div>
+<div>
+    @{
+        int a = 0;
+        foreach (var item in Model)
+        {
+            <table class="table" style="margin-bottom:100px; border-color:aqua;">
+                <tr class="text-center">
 
-        <table class="table" style="margin-bottom:100px; border-color:aqua;">
-            <tr class="text-center">
-
-                <th class="text-center">
-                    Nhiệt Độ
-                </th>
-                <th class="text-center">
-                    Áp Suất
-                </th>
-                <th class="text-center">
-                    Tốc Độ Gió
-                </th>
-                <th class="text-center">
-                    Nhiệt Độ Cao Nhất
-                </th>
-                <th class="text-center">
-                    Nhiệt Độ Thấp Nhất
-                </th>
-                <th class="text-center">
-                    Lượng Mưa
-                </th>
-                <th></th>
-            </tr>
-
-
-            <tr class="text-center">
-
-                <td style="color:chocolate">
-                    @Html.DisplayFor(model => model.nhietdo)<span> &#8451</span>
-                </td>
-                <td style="color: coral">
-                    @Html.DisplayFor(model => model.apsuat)<span> mmPa</span>
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.tocdogio)<span> km/s</span>
-                </td>
-                <td style="color: crimson">
-                    @Html.DisplayFor(model => model.tmax)<span> &#8451</span>
-                </td>
-                <td style="color: aquamarine">
-                    @Html.DisplayFor(model => model.tmin)<span> &#8451</span>
-                </td>
-                <td style="color: cornflowerblue">
-                    @Html.DisplayFor(model => model.luongmua)<span> mm</span>
-                </td>
-                <td></td>
-            </tr>
+                    <th class="text-center">
+                        Nhiệt Độ
+                    </th>
+                    <th class="text-center">
+                        Áp Suất
+                    </th>
+                    <th class="text-center">
+                        Tốc Độ Gió
+                    </th>
+                    <th class="text-center">
+                        Nhiệt Độ Cao Nhất
+                    </th>
+                    <th class="text-center">
+                        Nhiệt Độ Thấp Nhất
+                    </th>
+                    <th class="text-center">
+                        Lượng Mưa
+                    </th>
+                    <th></th>
+                </tr>
 
 
-        </table>
-        <hr />
+                <tr class="text-center">
 
-    </div>
+                    <td style="color:chocolate">
+                        @Html.DisplayFor(modelItem => item.nhietdo)<span> &#8451</span>
+                    </td>
+                    <td style="color: coral">
+                        @Html.DisplayFor(modelItem => item.apsuat)<span> mmPa</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tocdogio)<span> m/s</span>
+                    </td>
+                    <td style="color: crimson">
+                        @Html.DisplayFor(modelItem => item.tmax)<span> &#8451</span>
+                    </td>
+                    <td style="color: aquamarine">
+                        @Html.DisplayFor(modelItem => item.tmin)<span> &#8451</span>
+                    </td>
+                    <td style="color: cornflowerblue">
+                        @Html.DisplayFor(modelItem => item.luongmua)<span> mm</span>
+                    </td>
+                    <td></td>
+                </tr>
 
+                @{ if (a == 0)
+                    {
+                        a++;
+                    }
+                    else if (a == 1)
+                    {
+                        <h4>THỜI TIẾT 2 NGÀY TỚI</h4>
+                        string d, m, y;
+                        int dd, mm, yy;
+                        d = DateTime.Now.Day.ToString();
+                        m = DateTime.Now.Month.ToString();
+                        y = DateTime.Now.Year.ToString();
+                        dd = (int.Parse(d));
+                        dd += a;
+                        mm = int.Parse(m);
+                        yy = int.Parse(y);
+                        <h4>@dd/@mm/@yy</h4>
+                        a++;
+                    }
+                    else
+                    {
+                        string d, m, y;
+                        int dd, mm, yy;
+                        d = DateTime.Now.Day.ToString();
+                        m = DateTime.Now.Month.ToString();
+                        y = DateTime.Now.Year.ToString();
+                        dd = (int.Parse(d));
+                        dd += a;
+                        mm = int.Parse(m);
+                        yy = int.Parse(y);
+                        <h4>@dd/@mm/@yy</h4>
+                        a++;
+                    }
+                }
+            </table>
+            <hr />
+        }
+    }
+
+
+</div>

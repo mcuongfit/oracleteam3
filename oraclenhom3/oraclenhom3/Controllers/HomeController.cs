@@ -26,7 +26,7 @@ namespace oraclenhom3.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-
+            
             List<dubaoviewmodel> ctts = new List<dubaoviewmodel>();
             
             
@@ -62,7 +62,7 @@ namespace oraclenhom3.Controllers
                 Tocdogio = 0;
                 for (int i = 2008; i < yy; i++)
                 {
-                    var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == (18+j) && c.MO == mm && c.YEAR == i && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "VINH").First();
+                    var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == (dd+j) && c.MO == mm && c.YEAR == i && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "VINH").First();
                     Nhietd += Convert.ToInt32(CTT.NHIETDO);
                     Luongm += Convert.ToInt32(CTT.LUONGMUA);
                     Aps += Convert.ToInt32(CTT.APSUAT);
@@ -179,64 +179,12 @@ namespace oraclenhom3.Controllers
         [HttpPost]
         public ActionResult chonnuoc( string manuoc)
         {
-            dubaoviewmodel ctt = new dubaoviewmodel();
-            string d, m, y, anh,tenTram;
-            int dd, mm, yy;
-            int Nhietd = 0, Aps = 0, Luongm = 0, Tmax = 0, Tmin = 0, Tocdogio = 0;
-            d = DateTime.Now.Day.ToString();
-            m = DateTime.Now.Month.ToString();
-            y = DateTime.Now.Year.ToString();
-            dd = (int.Parse(d));
-            mm = int.Parse(m);
-            yy = int.Parse(y);
-            List<string> arr = new List<string>();
-            var trams = db.TRAMS.Where(c => c.MANUOC ==manuoc);
-            tenTram = trams.First().TENTRAM;
-            var nuocs = db.NUOCS.Where(c => c.MANUOC == manuoc);
-            anh = nuocs.First().HINH;
-            foreach (var item in trams)
-            {
-                arr.Add(item.TENTRAM);
-            }
-            for (int i = 2008; i < yy; i++)
-            {
-                var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == 18 && c.MO == mm  && c.YEAR == i && c.TRAM.NUOC.MANUOC == manuoc).First();
-                Nhietd += Convert.ToInt32(CTT.NHIETDO);
-                Luongm += Convert.ToInt32(CTT.LUONGMUA);
-                Aps += Convert.ToInt32(CTT.APSUAT);
-                Tmax += Convert.ToInt32(CTT.TMAX);
-                Tmin += Convert.ToInt32(CTT.TMIN);
-                Tocdogio += Convert.ToInt32(CTT.TOCDOGIO);
+            List<dubaoviewmodel> ctts = new List<dubaoviewmodel>();
 
-            }
-            Nhietd = Nhietd / (yy - 2008);
-            Nhietd = ((Nhietd - 32) * 5) / 9;
-            Luongm = Luongm / (yy - 2008);
-            Aps = Aps / (yy - 2008);
-            Tmin = Tmin / (yy - 2008);
-            Tmin = ((Tmin - 32) * 5) / 9;
-            Tmax = Tmax / (yy - 2008);
-            Tmax = ((Tmax - 32) * 5) / 9;
-            Tocdogio = Tocdogio / (yy - 2008);
-            ctt.apsuat = Aps;
-            ctt.luongmua = Luongm;
-            ctt.nhietdo = Nhietd;
-            ctt.tmax = Tmax;
-            ctt.tmin = Tmin;
-            ctt.tocdogio = Tocdogio;
-            ctt.tenTram = tenTram;
-            ctt.Hinh = anh;
-            ctt.Manuoc = manuoc;
-            ViewData["arr"] = arr;
-            return View(ctt);
-        }
-        [HttpPost]
-        public ActionResult dubao( string manuoc,string tentram)
-        {
-            dubaoviewmodel ctt = new dubaoviewmodel();
+
             string d, m, y, anh;
             int dd, mm, yy;
-            int Nhietd = 0, Aps = 0, Luongm = 0, Tmax = 0, Tmin = 0,Tocdogio=0;
+            int Nhietd = 0, Aps = 0, Luongm = 0, Tmax = 0, Tmin = 0, Tocdogio = 0;
             d = DateTime.Now.Day.ToString();
             m = DateTime.Now.Month.ToString();
             y = DateTime.Now.Year.ToString();
@@ -251,38 +199,128 @@ namespace oraclenhom3.Controllers
             {
                 arr.Add(item.TENTRAM);
             }
-            for (int i = 2008; i < yy; i++)
+            for (int j = 0; j < 3; j++)
             {
-                var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == 18 && c.MO == mm && c.YEAR == i && c.TRAM.NUOC.MANUOC == manuoc && c.TRAM.TENTRAM == tentram).First();
-                Nhietd += Convert.ToInt32(CTT.NHIETDO);
-                Luongm += Convert.ToInt32(CTT.LUONGMUA);
-                Aps += Convert.ToInt32(CTT.APSUAT);
-                Tmax += Convert.ToInt32(CTT.TMAX);
-                Tmin += Convert.ToInt32(CTT.TMIN);
-                Tocdogio += Convert.ToInt32(CTT.TOCDOGIO);
-                
-            }
-            Nhietd = Nhietd / (yy - 2008);
-            Nhietd = ((Nhietd - 32) * 5) / 9;
-            Luongm = Luongm / (yy - 2008);
-            Aps = Aps / (yy - 2008);
-            Tmin = Tmin / (yy - 2008);
-            Tmin = ((Tmin - 32) * 5) / 9;
-            Tmax = Tmax / (yy - 2008);
-            Tmax = ((Tmax - 32) * 5) / 9;
-            Tocdogio = Tocdogio/ (yy - 2008);
-            ctt.apsuat = Aps;
-            ctt.luongmua = Luongm;
-            ctt.nhietdo = Nhietd;
-            ctt.tmax = Tmax;
-            ctt.tmin = Tmin;
-            ctt.tocdogio = Tocdogio;
-            ctt.tenTram = tentram;
-            ctt.Hinh = anh;
-            ctt.Manuoc = manuoc;
-            ViewData["arr"] = arr;
-            return View(ctt);
+                dubaoviewmodel ctt = new dubaoviewmodel();
+                //Random rd = new Random();
 
+                //int rdom = rd.Next(1, 5);
+
+                Nhietd = 0;
+                Aps = 0;
+                Luongm = 0;
+                Tmax = 0;
+                Tmin = 0;
+                Tocdogio = 0;
+                for (int i = 2008; i < yy; i++)
+                {
+                    var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == (dd + j) && c.MO == mm && c.YEAR == i && c.TRAM.NUOC.MANUOC == manuoc ).First();
+                    Nhietd += Convert.ToInt32(CTT.NHIETDO);
+                    Luongm += Convert.ToInt32(CTT.LUONGMUA);
+                    Aps += Convert.ToInt32(CTT.APSUAT);
+                    Tmax += Convert.ToInt32(CTT.TMAX);
+                    Tmin += Convert.ToInt32(CTT.TMIN);
+                    Tocdogio += Convert.ToInt32(CTT.TOCDOGIO);
+
+                }
+
+                Nhietd = Nhietd / (yy - 2008);
+                Nhietd = (((Nhietd - 32) * 5) / 9);
+                Luongm = Luongm / (yy - 2008);
+                Aps = (Aps / (yy - 2008));
+                Tmin = Tmin / (yy - 2008);
+                Tmin = (((Tmin - 32) * 5) / 9);
+                Tmax = Tmax / (yy - 2008);
+                Tmax = (((Tmax - 32) * 5) / 9);
+                Tocdogio = Tocdogio / (yy - 2008);
+                ctt.apsuat = Aps;
+                ctt.luongmua = Luongm;
+                ctt.nhietdo = Nhietd;
+                ctt.tmax = Tmax;
+                ctt.tmin = Tmin;
+                ctt.tocdogio = Tocdogio;
+                ctt.tenTram = trams.First().TENTRAM;
+                ctt.Hinh = anh;
+                ctt.Manuoc = trams.First().NUOC.MANUOC;
+                ctts.Add(ctt);
+
+            }
+            ViewData["arr"] = arr;
+
+            return View(ctts);
+        }
+        [HttpPost]
+        public ActionResult dubao( string manuoc,string tentram)
+        {
+            List<dubaoviewmodel> ctts = new List<dubaoviewmodel>();
+
+
+            string d, m, y, anh;
+            int dd, mm, yy;
+            int Nhietd = 0, Aps = 0, Luongm = 0, Tmax = 0, Tmin = 0, Tocdogio = 0;
+            d = DateTime.Now.Day.ToString();
+            m = DateTime.Now.Month.ToString();
+            y = DateTime.Now.Year.ToString();
+            dd = (int.Parse(d));
+            mm = int.Parse(m);
+            yy = int.Parse(y);
+            List<string> arr = new List<string>();
+            var trams = db.TRAMS.Where(c => c.MANUOC == manuoc);
+            var nuocs = db.NUOCS.Where(c => c.MANUOC == manuoc);
+            anh = nuocs.First().HINH;
+            foreach (var item in trams)
+            {
+                arr.Add(item.TENTRAM);
+            }
+            for (int j = 0; j < 3; j++)
+            {
+                dubaoviewmodel ctt = new dubaoviewmodel();
+                //Random rd = new Random();
+
+                //int rdom = rd.Next(1, 5);
+
+                Nhietd = 0;
+                Aps = 0;
+                Luongm = 0;
+                Tmax = 0;
+                Tmin = 0;
+                Tocdogio = 0;
+                for (int i = 2008; i < yy; i++)
+                {
+                    var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == (dd + j) && c.MO == mm && c.YEAR == i && c.TRAM.NUOC.MANUOC == manuoc && c.TRAM.TENTRAM == tentram).First();
+                    Nhietd += Convert.ToInt32(CTT.NHIETDO);
+                    Luongm += Convert.ToInt32(CTT.LUONGMUA);
+                    Aps += Convert.ToInt32(CTT.APSUAT);
+                    Tmax += Convert.ToInt32(CTT.TMAX);
+                    Tmin += Convert.ToInt32(CTT.TMIN);
+                    Tocdogio += Convert.ToInt32(CTT.TOCDOGIO);
+
+                }
+
+                Nhietd = Nhietd / (yy - 2008);
+                Nhietd = (((Nhietd - 32) * 5) / 9);
+                Luongm = Luongm / (yy - 2008);
+                Aps = (Aps / (yy - 2008));
+                Tmin = Tmin / (yy - 2008);
+                Tmin = (((Tmin - 32) * 5) / 9);
+                Tmax = Tmax / (yy - 2008);
+                Tmax = (((Tmax - 32) * 5) / 9);
+                Tocdogio = Tocdogio / (yy - 2008);
+                ctt.apsuat = Aps;
+                ctt.luongmua = Luongm;
+                ctt.nhietdo = Nhietd;
+                ctt.tmax = Tmax;
+                ctt.tmin = Tmin;
+                ctt.tocdogio = Tocdogio;
+                ctt.tenTram = tentram;
+                ctt.Hinh = anh;
+                ctt.Manuoc = manuoc;
+                ctts.Add(ctt);
+
+            }
+            ViewData["arr"] = arr;
+
+            return View(ctts);
 
         }
 
@@ -290,7 +328,7 @@ namespace oraclenhom3.Controllers
 		{
 			List<CHITIETTRAM> re = new List<CHITIETTRAM>();
 			// Add file json.
-			using (BigQueryClient client = BigQueryClient.Create("phantantai", GoogleCredential.FromFile(@"C:\Users\phant\Desktop\oracleteam3\oraclenhom3\oraclenhom3\App_Data\phantantai-c3450caeb9b5.json")))
+			using (BigQueryClient client = BigQueryClient.Create("phantantai", GoogleCredential.FromFile(@"C:\Users\ykdn1\OneDrive\Máy tính\oracle18.5\oracleteam3\oraclenhom3\oraclenhom3\App_Data\phantantai-c3450caeb9b5.json")))
 			{
 				string query = $@"
 				SELECT stn as MATRAM,da as DA,mo as MO,year as YEAR ,temp as NHIETDO,slp as APSUAT,wdsp as TOCDOGIO,max as TMAX,min as TMIN,prcp as LUONGMUA 
@@ -330,7 +368,8 @@ namespace oraclenhom3.Controllers
 		}
 		public ActionResult Update()
         {
-			string d, m;
+            Response.AddHeader("Refresh", "86400");
+            string d, m;
             int dd, mm;//ngày tháng năm hiện tại, có gì tại lấy ngày -7
 			var date = DateTime.Now.AddDays(-7);
             dd = date.Day;
@@ -338,7 +377,7 @@ namespace oraclenhom3.Controllers
 			d = dd > 9 ? dd.ToString() : "0"+dd.ToString();
 			m = mm > 9 ? mm.ToString() : "0"+mm.ToString();
 			
-            List<CHITIETTRAM> re = new List<CHITIETTRAM>();//tài add data chi tiết trạm của mỡi trạm của ngày trên vào đây
+            List<CHITIETTRAM> re = new List<CHITIETTRAM>();// add data chi tiết trạm của mỡi trạm của ngày trên vào đây
             List<string> arr = new List<string>();//đây là arr gồm 682   trạm của tất cả các nước
             var arrtram = db.TRAMS.ToList();
             
@@ -353,11 +392,14 @@ namespace oraclenhom3.Controllers
 				var data = Update(item, m, d);
 				if (data.Count != 0)
 				{
-					re.Add(data[0]);
-				}
+					re.Add(data[0]);//test
+                    db.CHITIETTRAMS.Add(data[0]);
+                    db.SaveChanges();
+                }
 			}
-            return View();
-            
+            return RedirectToAction("index", "Home");
+
+
         }
         public ActionResult Contact()
         {
