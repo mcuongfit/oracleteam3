@@ -35,58 +35,92 @@
 
     <div>
         @{
+            int a = 0;
             foreach (var item in Model)
             {
-                <table class="table" style="margin-bottom:100px; border-color:aqua;">
-                    <tr class="text-center">
+        <table class="table" style="margin-bottom:100px; border-color:aqua;">
+            <tr class="text-center">
 
-                        <th class="text-center">
-                            Nhiệt Độ
-                        </th>
-                        <th class="text-center">
-                            Áp Suất
-                        </th>
-                        <th class="text-center">
-                            Tốc Độ Gió
-                        </th>
-                        <th class="text-center">
-                            Nhiệt Độ Cao Nhất
-                        </th>
-                        <th class="text-center">
-                            Nhiệt Độ Thấp Nhất
-                        </th>
-                        <th class="text-center">
-                            Lượng Mưa
-                        </th>
-                        <th></th>
-                    </tr>
-
-
-                    <tr class="text-center">
-
-                        <td style="color:chocolate">
-                            @Html.DisplayFor(modelItem => item.nhietdo)<span> &#8451</span>
-                        </td>
-                        <td style="color: coral">
-                            @Html.DisplayFor(modelItem => item.apsuat)<span> mmPa</span>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tocdogio)<span> m/s</span>
-                        </td>
-                        <td style="color: crimson">
-                            @Html.DisplayFor(modelItem => item.tmax)<span> &#8451</span>
-                        </td>
-                        <td style="color: aquamarine">
-                            @Html.DisplayFor(modelItem => item.tmin)<span> &#8451</span>
-                        </td>
-                        <td style="color: cornflowerblue">
-                            @Html.DisplayFor(modelItem => item.luongmua)<span> mm</span>
-                        </td>
-                        <td></td>
-                    </tr>
+                <th class="text-center">
+                    Nhiệt Độ
+                </th>
+                <th class="text-center">
+                    Áp Suất
+                </th>
+                <th class="text-center">
+                    Tốc Độ Gió
+                </th>
+                <th class="text-center">
+                    Nhiệt Độ Cao Nhất
+                </th>
+                <th class="text-center">
+                    Nhiệt Độ Thấp Nhất
+                </th>
+                <th class="text-center">
+                    Lượng Mưa
+                </th>
+                <th></th>
+            </tr>
 
 
-                </table>
+            <tr class="text-center">
+
+                <td style="color:chocolate">
+                    @Html.DisplayFor(modelItem => item.nhietdo)<span> &#8451</span>
+                </td>
+                <td style="color: coral">
+                    @Html.DisplayFor(modelItem => item.apsuat)<span> mmPa</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tocdogio)<span> m/s</span>
+                </td>
+                <td style="color: crimson">
+                    @Html.DisplayFor(modelItem => item.tmax)<span> &#8451</span>
+                </td>
+                <td style="color: aquamarine">
+                    @Html.DisplayFor(modelItem => item.tmin)<span> &#8451</span>
+                </td>
+                <td style="color: cornflowerblue">
+                    @Html.DisplayFor(modelItem => item.luongmua)<span> mm</span>
+                </td>
+                <td></td>
+            </tr>
+
+            @{ if (a == 0)
+                {
+                    a++;
+                }
+                else if (a == 1)
+                {
+                    <h4>THỜI TIẾT 2 NGÀY TỚI</h4>
+                    string d, m, y;
+                    int dd, mm, yy;
+                    d = DateTime.Now.Day.ToString();
+                    m = DateTime.Now.Month.ToString();
+                    y = DateTime.Now.Year.ToString();
+                    dd = (int.Parse(d));
+                    dd += a;
+                    mm = int.Parse(m);
+                    yy = int.Parse(y);
+                    <h4>@dd/@m/@y</h4>
+                    a++;
+                }
+                else
+                {
+                    string d, m, y;
+                    int dd, mm, yy;
+                    d = DateTime.Now.Day.ToString();
+                    m = DateTime.Now.Month.ToString();
+                    y = DateTime.Now.Year.ToString();
+                    dd = (int.Parse(d));
+                    dd += a;
+                    mm = int.Parse(m);
+                    yy = int.Parse(y);
+                    <h4>@dd/@m/@y</h4>
+                    a++;
+                }
+            }
+        </table>
                 <hr />
             }
         }

@@ -1,5 +1,8 @@
 ﻿using oraclenhom3.Models;
 using System;
+using System.Text;
+using System.Threading.Tasks;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,7 +25,7 @@ namespace oraclenhom3.Controllers
         {
 
             List<dubaoviewmodel> ctts = new List<dubaoviewmodel>();
-            dubaoviewmodel ctt = new dubaoviewmodel();
+            
             
             string d, m, y, anh;
             int dd, mm, yy;
@@ -41,11 +44,12 @@ namespace oraclenhom3.Controllers
             {
                 arr.Add(item.TENTRAM);
             }
-            for (int j = 0; j < 4; j++)
+            for (int j = 0; j < 3; j++)
             {
-                Random rd = new Random();
+                dubaoviewmodel ctt = new dubaoviewmodel();
+                //Random rd = new Random();
                 
-                int rdom = rd.Next(1, 5);
+                //int rdom = rd.Next(1, 5);
                
                 Nhietd = 0;
                 Aps = 0;
@@ -55,7 +59,7 @@ namespace oraclenhom3.Controllers
                 Tocdogio = 0;
                 for (int i = 2008; i < yy; i++)
                 {
-                    var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == 18+j && c.MO == mm && c.YEAR == i && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "BAN ME THUOT").First();
+                    var CTT = db.CHITIETTRAMS.Include(t => t.TRAM).Where(c => c.DA == (18+j) && c.MO == mm && c.YEAR == i && c.TRAM.NUOC.MANUOC == "VM" && c.TRAM.TENTRAM == "BAN ME THUOT").First();
                     Nhietd += Convert.ToInt32(CTT.NHIETDO);
                     Luongm += Convert.ToInt32(CTT.LUONGMUA);
                     Aps += Convert.ToInt32(CTT.APSUAT);
@@ -66,14 +70,14 @@ namespace oraclenhom3.Controllers
                 }
                 
                 Nhietd = Nhietd / (yy - 2008);
-                Nhietd = (((Nhietd - 32) * 5) / 9)+rdom+j;
-                Luongm = Luongm / (yy - 2008)+rdom+j;
-                Aps = (Aps / (yy - 2008))+rdom+j;
+                Nhietd = (((Nhietd - 32) * 5) / 9);
+                Luongm = Luongm / (yy - 2008);
+                Aps = (Aps / (yy - 2008));
                 Tmin = Tmin / (yy - 2008);
-                Tmin = (((Tmin - 32) * 5) / 9)+rdom+j;
+                Tmin = (((Tmin - 32) * 5) / 9);
                 Tmax = Tmax / (yy - 2008);
-                Tmax = (((Tmax - 32) * 5) / 9)+rdom+j;
-                Tocdogio = Tocdogio / (yy - 2008)+rdom+j;
+                Tmax = (((Tmax - 32) * 5) / 9);
+                Tocdogio = Tocdogio / (yy - 2008);
                 ctt.apsuat = Aps;
                 ctt.luongmua = Luongm;
                 ctt.nhietdo = Nhietd;
@@ -277,6 +281,64 @@ namespace oraclenhom3.Controllers
             return View(ctt);
 
 
+        }
+        public ActionResult Update()
+        {
+            string d, m, y;
+            int dd, mm, yy;//ngày tháng năm hiện tại, có gì tại lấy ngày -7
+            int Nhietd = 0, Aps = 0, Luongm = 0, Tmax = 0, Tmin = 0, Tocdogio = 0;
+            d = DateTime.Now.Day.ToString();
+            m = DateTime.Now.Month.ToString();
+            y = DateTime.Now.Year.ToString();
+            dd = (int.Parse(d));
+            mm = int.Parse(m);
+            yy = int.Parse(y);
+            List<CHITIETTRAM> re = new List<CHITIETTRAM>();//tài add data chi tiết trạm của mỡi trạm của ngày trên vào đây
+            List<int> arr = new List<int>();//đây là arr gồm 682   trạm của tất cả các nước
+            var arrtram = db.TRAMS.ToList();
+            
+      
+            foreach (var item in arrtram)
+            {
+                arr.Add(item.MATRAM);
+            }
+            //using (BigQueryClient client = BigQueryClient.Create("phantantai", GoogleCredential.FromFile("../../phantantai-c3450caeb9b5.json")))
+            //{
+            //    string query = $@"
+            //	SELECT stn as MATRAM,da as DA,mo as MO,year as YEAR ,temp as NHIETDO,slp as APSUAT,wdsp as TOCDOGIO,max as TMAX,min as TMIN,prcp as LUONGMUA 
+            //	FROM `bigquery-public-data.noaa_gsod.gsod2019` 
+            //	where stn = '{matram}' and mo = '{mo}' and da > '{da}'";
+            //    BigQueryJob job = client.CreateQueryJob(
+            //        sql: query,
+            //       parameters: null,
+            //       options: new QueryOptions { UseQueryCache = false });
+            // Wait for the job to complete.
+            //    job.PollUntilCompleted();
+            //    CHITIETTRAM chitie = new CHITIETTRAM();
+            //    foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
+            //  {
+            //      chitie.MATRAM = int.Parse($"{row["MATRAM"]}");
+            //      chitie.MO = byte.Parse($"{row["MO"]}");
+            //     chitie.DA = short.Parse($"{row["DA"]}");
+            //    chitie.YEAR = short.Parse($"{row["YEAR"]}");
+
+            //    var nd = float.Parse($"{row["NHIETDO"]}");
+            //    chitie.NHIETDO = (byte)nd;
+
+            //    var tmp = float.Parse($"{row["APSUAT"]}");
+            //    chitie.APSUAT = tmp < 900 ? (int)tmp : 0;
+            //   tmp = float.Parse($"{row["TOCDOGIO"]}");
+            //  chitie.TOCDOGIO = tmp < 900 ? (short)tmp : (short)0;
+            //  tmp = float.Parse($"{row["TMAX"]}");
+            //  chitie.TMAX = tmp < 900 ? (short)tmp : (short)0;
+            //  tmp = float.Parse($"{row["TMIN"]}");
+            //  chitie.TMIN = tmp < 900 ? (short)tmp : (short)0;
+            //  tmp = float.Parse($"{row["LUONGMUA"]}");
+            // chitie.LUONGMUA = tmp < 900 ? (short)tmp : (short)0;
+            // re.Add(chitie);
+            // }
+            return View();
+            
         }
         public ActionResult Contact()
         {
